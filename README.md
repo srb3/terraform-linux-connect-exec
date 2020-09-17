@@ -10,6 +10,9 @@ The script that is run is passed through in the `var.script` variable. Connectio
 
 #### basic:
 ```hcl
+locals {
+  install_script = templatefile("${path.module}/templates/install.sh", {})
+}
 
 module "connect_and_execute" {
   source          = "srb3/connect-exec/linux"
@@ -18,6 +21,7 @@ module "connect_and_execute" {
   count           = 1
   user_name       = "centos"
   ssh_private_key = "~/.ssh/id_rsa"
+  script          = var.install_script
 }
 ```
 
@@ -31,11 +35,13 @@ module "connect_and_execute_via_bastion" {
   count                = 1
   ssh_user             = "centos"
   ssh_private_key      = "~/.ssh/id_rsa"
+  script               = var.install_script
   bastion_ip           = "203.0.113.2"
   bastion_ssh_user     = "jumphost"
   bastion_ssh_private_key = "~/.ssh/jumphost.pem"
 }
 ```
+
 ## Inputs
 
 | Name | Description | Type | Default | Required |
