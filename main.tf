@@ -8,7 +8,7 @@ resource "null_resource" "cluster" {
     value = md5(var.script)
   }
 
-  count = var.count
+  count = var.target_count
   connection {
     host                = var.ips[count.index]
     user                = var.ssh_user

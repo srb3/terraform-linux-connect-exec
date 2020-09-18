@@ -1,4 +1,4 @@
-variable "count" {
+variable "target_count" {
   description = "The number of target hosts to connect to"
   type        = number
   default     = 0
